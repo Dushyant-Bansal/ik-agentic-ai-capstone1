@@ -1,0 +1,6 @@
+# Model routing and MCP config
+primary_model: gpt-4o-mini
+primary_provider: openai
+fallback_model: claude-3-haiku-20240307
+fallback_provider: anthropic
+max_retries: 2
