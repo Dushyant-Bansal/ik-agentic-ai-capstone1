@@ -88,3 +88,13 @@ def append_conversation(
     history.append(turn)
     profile.conversation_history = history
     save_profile(profile)
+
+
+def clear_history(user_id: str) -> None:
+    """Clear prior drafts and conversation history for a user."""
+    profile = load_profile(user_id)
+    if not profile:
+        return
+    profile.prior_drafts = []
+    profile.conversation_history = []
+    save_profile(profile)

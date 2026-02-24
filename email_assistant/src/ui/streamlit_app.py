@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 
 load_dotenv(_REPO_ROOT / ".env")
 
-from email_assistant.src.memory.profile_store import load_profile, save_profile
+from email_assistant.src.memory.profile_store import clear_history, load_profile, save_profile
 from email_assistant.src.models.schemas import DraftResult, IntentType, ToneType, UserProfile
 from email_assistant.src.workflow.langgraph_flow import invoke
 
@@ -61,7 +61,7 @@ def main() -> None:
         )
         st.session_state.profile_id = user_id or "default"
 
-        with st.expander("Profile (optional)"):
+        with st.expander("Profile & Memory"):
             profile = load_profile(st.session_state.profile_id)
             p_name = st.text_input("Your name", value=profile.name if profile else "", key="profile_name")
             p_company = st.text_input("Company", value=profile.company if profile else "", key="profile_company")
@@ -71,6 +71,10 @@ def main() -> None:
                 p.company = p_company or None
                 save_profile(p)
                 st.success("Profile saved.")
+
+            if st.button("Clear conversation history", key="clear_history_btn"):
+                clear_history(st.session_state.profile_id)
+                st.success("Conversation history cleared for this User ID.")
 
     # Main content
     prompt = st.text_area(

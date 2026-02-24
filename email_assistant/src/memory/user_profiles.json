@@ -12,74 +12,29 @@
       },
       "prior_drafts": [
         {
-          "subject": "Follow-Up on Our Meeting from Last Friday",
-          "intent": "follow_up",
-          "tone": "professional"
-        },
-        {
-          "subject": "Weekend Plans!",
-          "intent": "other",
-          "tone": "casual"
-        }
-      ]
-    },
-    {
-      "id": "Dushyant",
-      "name": null,
-      "company": null,
-      "style_preferences": {
-        "preferred_tone": null,
-        "signature": null,
-        "avoid_phrases": [],
-        "preferred_phrases": []
-      },
-      "prior_drafts": [
-        {
-          "subject": "Follow-Up on Our Meeting from Last Friday",
-          "intent": "follow_up",
-          "tone": "professional"
-        },
-        {
-          "subject": "Weekend Plans?",
-          "intent": "other",
-          "tone": "casual"
-        },
-        {
-          "subject": "Follow-Up on Bug Assignment",
-          "intent": "follow_up",
-          "tone": "professional"
-        },
-        {
-          "subject": "Request for Writeup on Your Approach",
+          "subject": "Inquiry Regarding Bug Report",
           "intent": "info_request",
           "tone": "professional"
         },
         {
-          "subject": "Request for Writeup on Your Approach to the Bug",
-          "intent": "info_request",
+          "subject": "Urgent: Completion Required by Tomorrow",
+          "intent": "internal_update",
           "tone": "professional"
         }
       ],
       "conversation_history": [
         {
-          "prompt": "I want to follow up with John on the bug that I assigned him last Friday.",
-          "subject": "Follow-Up on Bug Assignment",
-          "body": "Hi John,\n\nI hope this message finds you well. I wanted to follow up regarding the bug I assigned to you last Friday. Have you had a chance to look into it? If you need any assistance or additional information, please feel free to reach out.\n\nThank you for your attention to this matter, and I look forward to your update.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  \n[Your Contact Information]",
-          "intent": "follow_up",
-          "tone": "professional"
-        },
-        {
-          "prompt": "Ask him for a writeup to explain his approach.",
-          "subject": "Request for Writeup on Your Approach",
-          "body": "Hi John,\n\nI hope this message finds you well. I would appreciate it if you could provide a writeup explaining your approach to the recent project we discussed. Your insights would be valuable for our documentation and for aligning our team's efforts moving forward.\n\nPlease let me know if you have any questions or if you need further clarification on what to include in the writeup.\n\nThank you in advance for your assistance.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Contact Information]  \n[Your Company]",
+          "prompt": "Ask John about his bug",
+          "subject": "Inquiry Regarding Bug Report",
+          "body": "Hi John,\n\nI hope this message finds you well. I wanted to follow up on the bug report you submitted. I\u2019ve reviewed the details and have a few questions that I believe could help us resolve the issue more efficiently.\n\nCould we schedule a brief call this week to discuss it further? Please let me know your availability, and I will do my best to accommodate.\n\nThank you for your attention to this matter.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Contact Information]  \n[Your Company]\n\nDushyant",
           "intent": "info_request",
           "tone": "professional"
         },
         {
-          "prompt": "Ask him for a writeup to explain his approach on the bug that I assigned last Friday.",
-          "subject": "Request for Writeup on Your Approach to the Bug",
-          "body": "Hi John,\n\nI hope this message finds you well. I wanted to follow up regarding the bug I assigned to you last Friday. Could you please provide a writeup that outlines your approach to addressing this issue? It would be helpful to understand the steps you're considering and any challenges you anticipate.\n\nThank you for your attention to this matter. I look forward to your insights.\n\nBest regards,\n\n[Your Name]  \n[Your Job Title]  \n[Your Company]  \n[Your Contact Information]",
-          "intent": "info_request",
+          "prompt": "Tell him that we need it done by tomorrow",
+          "subject": "Urgent: Completion Required by Tomorrow",
+          "body": "Hi John,\n\nI hope this message finds you well. I wanted to touch base regarding the current tasks at hand. We need to ensure that everything is completed by tomorrow. \n\nPlease let me know if you foresee any challenges in meeting this deadline or if there\u2019s anything I can assist you with.\n\nThank you for your attention to this matter.\n\nBest regards,\n\n[Your Name]\n\nDushyant",
+          "intent": "internal_update",
           "tone": "professional"
         }
       ]
