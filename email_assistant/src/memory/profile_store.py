@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Optional
 
 from email_assistant.src.models.schemas import (
+    ConversationTurn,
     PriorDraftSummary,
     UserProfile,
 )
@@ -59,4 +60,31 @@ def append_draft(user_id: str, subject: str, intent: str, tone: str) -> None:
         profile = UserProfile(id=user_id)
     summary = PriorDraftSummary(subject=subject, intent=intent, tone=tone)
     profile.prior_drafts = (profile.prior_drafts or [])[-19:] + [summary]  # Keep last 20
+    save_profile(profile)
+
+
+def append_conversation(
+    user_id: str,
+    prompt: str,
+    subject: str,
+    body: str,
+    intent: str,
+    tone: str,
+) -> None:
+    """Append a full conversation turn (prompt + draft) to conversation_history."""
+    profile = load_profile(user_id)
+    if not profile:
+        profile = UserProfile(id=user_id)
+
+    turn = ConversationTurn(
+        prompt=prompt,
+        subject=subject,
+        body=body,
+        intent=intent,
+        tone=tone,
+    )
+
+    history = (profile.conversation_history or [])[-9:]  # keep last 10
+    history.append(turn)
+    profile.conversation_history = history
     save_profile(profile)

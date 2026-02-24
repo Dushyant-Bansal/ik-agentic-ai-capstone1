@@ -19,19 +19,20 @@ def run(state: dict[str, Any]) -> dict[str, Any]:
         return {"personalized_draft": draft}
 
     body = draft.body
-    changes = []
-
-    if profile.name:
-        if "Best regards" in body or "Regards," in body or "Sincerely" in body:
-            body = body.rstrip()
-            if not body.endswith(profile.name):
-                body += f"\n\n{profile.name}"
-                changes.append("added_signature")
-        changes.append("name_used")
+    # Prefer explicit signature over just name if available
+    signature = profile.style_preferences.signature if profile.style_preferences and profile.style_preferences.signature else profile.name
 
     if profile.company and "[Company]" in body:
         body = body.replace("[Company]", profile.company)
-        changes.append("company_injected")
+
+    # Always ensure a closing with signature/name when available
+    if signature:
+        stripped = body.rstrip()
+        # Avoid duplicating signature if already present at end
+        if not stripped.endswith(signature):
+            body = f"{stripped}\n\n{signature}"
+        else:
+            body = stripped
 
     personalized = DraftResult(
         subject=draft.subject,

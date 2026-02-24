@@ -3,7 +3,7 @@
 from typing import Any
 
 from email_assistant.src.integrations.config_loader import load_mcp_config
-from email_assistant.src.memory.profile_store import append_draft
+from email_assistant.src.memory.profile_store import append_conversation, append_draft
 from email_assistant.src.models.schemas import DraftResult, ReviewResult
 
 
@@ -17,13 +17,26 @@ def run(state: dict[str, Any]) -> dict[str, Any]:
     user_id = state.get("user_id", "default")
     errors = state.get("errors") or []
 
-    # Log draft to memory
+    # Log draft summaries and full conversation to memory
     if draft and isinstance(draft, DraftResult):
+        intent_val = draft.intent.value if draft.intent else "other"
+        tone_val = draft.tone.value if draft.tone else "professional"
+
         append_draft(
             user_id=user_id,
             subject=draft.subject,
-            intent=draft.intent.value if draft.intent else "other",
-            tone=draft.tone.value if draft.tone else "professional",
+            intent=intent_val,
+            tone=tone_val,
+        )
+
+        raw_prompt = state.get("raw_prompt") or ""
+        append_conversation(
+            user_id=user_id,
+            prompt=str(raw_prompt),
+            subject=draft.subject,
+            body=draft.body,
+            intent=intent_val,
+            tone=tone_val,
         )
 
     # Decide: retry or end

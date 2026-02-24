@@ -80,6 +80,16 @@ class PriorDraftSummary(BaseModel):
     tone: str = Field(...)
 
 
+class ConversationTurn(BaseModel):
+    """A single email-generation interaction for long-term memory."""
+
+    prompt: str = Field(..., description="User's original request/prompt")
+    subject: str = Field(..., description="Generated email subject")
+    body: str = Field(..., description="Generated email body")
+    intent: str = Field(..., description="Intent at time of generation")
+    tone: str = Field(..., description="Tone at time of generation")
+
+
 class UserProfile(BaseModel):
     """User profile for personalization."""
 
@@ -88,6 +98,10 @@ class UserProfile(BaseModel):
     company: Optional[str] = Field(None, description="Company name")
     style_preferences: StylePreferences = Field(default_factory=StylePreferences)
     prior_drafts: list[PriorDraftSummary] = Field(default_factory=list)
+    conversation_history: list[ConversationTurn] = Field(
+        default_factory=list,
+        description="Recent email-generation interactions for contextual memory",
+    )
 
 
 class ReviewResult(BaseModel):
