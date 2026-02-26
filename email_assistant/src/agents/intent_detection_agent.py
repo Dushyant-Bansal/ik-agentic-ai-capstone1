@@ -17,27 +17,29 @@ class _IntentOutput(BaseModel):
     intent: str = Field(..., description="One of: " + ", ".join(_INTENTS))
 
 
-def run(state: dict[str, Any]) -> dict[str, Any]:
-    """Classify email intent. Returns intent."""
-    parsed = state.get("parsed_input")
-    user_intent_override = state.get("user_intent_override")
+class IntentDetectionAgent:
+    """Classifies the email request into an IntentType."""
 
-    if user_intent_override and user_intent_override in _INTENTS:
-        return {"intent": IntentType(user_intent_override)}
+    def run(self, state: dict[str, Any]) -> dict[str, Any]:
+        parsed = state.get("parsed_input")
+        user_intent_override = state.get("user_intent_override")
 
-    if not parsed:
-        return {"intent": IntentType.OTHER}
+        if user_intent_override and user_intent_override in _INTENTS:
+            return {"intent": IntentType(user_intent_override)}
 
-    llm = get_llm(temperature=0).with_structured_output(_IntentOutput)
-    prompt = f"""Classify the intent of this email request into exactly one of: {", ".join(_INTENTS)}.
+        if not parsed:
+            return {"intent": IntentType.OTHER}
+
+        llm = get_llm(temperature=0).with_structured_output(_IntentOutput)
+        prompt = f"""Classify the intent of this email request into exactly one of: {", ".join(_INTENTS)}.
 
 Request: {parsed.prompt}
 
 Respond with the intent value only."""
 
-    try:
-        out = llm.invoke(prompt)
-        intent_val = out.intent.lower().replace("-", "_").replace(" ", "_")
-        return {"intent": IntentType(intent_val) if intent_val in _INTENTS else IntentType.OTHER}
-    except Exception:
-        return {"intent": IntentType.OTHER}
+        try:
+            out = llm.invoke(prompt)
+            intent_val = out.intent.lower().replace("-", "_").replace(" ", "_")
+            return {"intent": IntentType(intent_val) if intent_val in _INTENTS else IntentType.OTHER}
+        except Exception:
+            return {"intent": IntentType.OTHER}

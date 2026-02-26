@@ -20,6 +20,36 @@
           "subject": "Urgent: Completion Required by Tomorrow",
           "intent": "internal_update",
           "tone": "professional"
+        },
+        {
+          "subject": "Follow-Up on Bug Assignment",
+          "intent": "follow_up",
+          "tone": "professional"
+        },
+        {
+          "subject": "Timeline Inquiry for Task Completion",
+          "intent": "info_request",
+          "tone": "professional"
+        },
+        {
+          "subject": "Request for Completion by Tomorrow",
+          "intent": "outreach",
+          "tone": "professional"
+        },
+        {
+          "subject": "Request for Bug Specification",
+          "intent": "info_request",
+          "tone": "professional"
+        },
+        {
+          "subject": "Request for Bug Specification",
+          "intent": "info_request",
+          "tone": "friendly"
+        },
+        {
+          "subject": "Quick Question About Your Bug Spec",
+          "intent": "info_request",
+          "tone": "casual"
         }
       ],
       "conversation_history": [
@@ -36,6 +66,48 @@
           "body": "Hi John,\n\nI hope this message finds you well. I wanted to touch base regarding the current tasks at hand. We need to ensure that everything is completed by tomorrow. \n\nPlease let me know if you foresee any challenges in meeting this deadline or if there\u2019s anything I can assist you with.\n\nThank you for your attention to this matter.\n\nBest regards,\n\n[Your Name]\n\nDushyant",
           "intent": "internal_update",
           "tone": "professional"
+        },
+        {
+          "prompt": "Follow up with John on the bug I assigned him last week.",
+          "subject": "Follow-Up on Bug Assignment",
+          "body": "Hi John,\n\nI hope this message finds you well. I wanted to follow up on the bug I assigned to you last week. Have you had a chance to make any progress or do you need any assistance?\n\nPlease let me know if you have any updates or if there's anything I can do to help.\n\nThank you for your attention to this matter.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Contact Information]  \n[Your Company]\n\nDushyant",
+          "intent": "follow_up",
+          "tone": "professional"
+        },
+        {
+          "prompt": "Ask him when can he get it done by?",
+          "subject": "Timeline Inquiry for Task Completion",
+          "body": "Hi John,\n\nI hope this message finds you well. I wanted to follow up regarding the task we discussed. Could you please let me know when you anticipate being able to get it done by? \n\nThank you for your attention to this matter.\n\nBest regards,\n\n[Your Name]\n\nDushyant",
+          "intent": "info_request",
+          "tone": "professional"
+        },
+        {
+          "prompt": "Ask him if he can get it done by tomorrow",
+          "subject": "Request for Completion by Tomorrow",
+          "body": "Hi John,\n\nI hope this message finds you well. I wanted to follow up regarding the task we discussed earlier. Would it be possible for you to have it completed by tomorrow? \n\nPlease let me know if you foresee any challenges in meeting this timeline.\n\nThank you for your attention to this matter.\n\nBest regards,\n\n[Your Name]\n\nDushyant",
+          "intent": "outreach",
+          "tone": "professional"
+        },
+        {
+          "prompt": "Ask him if he has a spec for his bug?",
+          "subject": "Request for Bug Specification",
+          "body": "Hi John,\n\nI hope this message finds you well. I wanted to follow up regarding the bug we discussed. Could you please provide the specification for it? Having the details will help us address the issue more effectively.\n\nThank you for your attention to this matter. \n\nBest regards,\n\n[Your Name]\n\nDushyant",
+          "intent": "info_request",
+          "tone": "professional"
+        },
+        {
+          "prompt": "Ask him if he has a spec for his bug?",
+          "subject": "Request for Bug Specification",
+          "body": "Hi John,\n\nHope you're having a wonderful day! I wanted to check in and see if you have a specification for the bug we discussed. Having the details would really help us address it more effectively.\n\nLooking forward to hearing from you soon!\n\nBest regards,\n\n[Your Name]\n\nDushyant",
+          "intent": "info_request",
+          "tone": "friendly"
+        },
+        {
+          "prompt": "Ask him if he has a spec for his bug?",
+          "subject": "Quick Question About Your Bug Spec",
+          "body": "Hey John,\n\nHope you\u2019re doing well! I just wanted to check in and see if you have a spec for your bug yet. It would really help me get a better understanding of what needs to be fixed.\n\nThanks a bunch!\n\nCheers,\n[Your Name]\n\nDushyant",
+          "intent": "info_request",
+          "tone": "casual"
         }
       ]
     }

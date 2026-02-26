@@ -4,10 +4,43 @@ Capstone Project 1 for IK Agentic AI course. A multi-agent pipeline that generat
 
 ## Architecture
 
+```mermaid
+flowchart LR
+    subgraph Input
+        User[User Prompt + Tone]
+    end
+
+    subgraph Pipeline
+        IP[Input Parser]
+        ID[Intent Detection]
+        TS[Tone Stylist]
+        DW[Draft Writer]
+        PA[Personalization]
+        RV[Review & Validator]
+        RM[Router & Memory]
+    end
+
+    subgraph Data
+        UP[(user_profiles.json)]
+        Tones[(tone_samples)]
+    end
+
+    User --> IP
+    IP --> ID
+    ID --> TS
+    TS --> DW
+    DW --> PA
+    PA --> RV
+    RV --> RM
+    RM -->|retry if failed| DW
+    RM --> Final[Final Draft]
+
+    PA --> UP
+    RM --> UP
+    TS --> Tones
 ```
-User Prompt → Input Parser → Intent Detection → Tone Stylist → Draft Writer
-    → Personalization → Review & Validator → Router & Memory → Final Draft
-```
+
+Rendered diagram: see [assets/email_assistant_agent_flow.png](assets/email_assistant_agent_flow.png).
 
 ### Agents
 

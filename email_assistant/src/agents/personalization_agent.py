@@ -3,41 +3,44 @@
 from typing import Any
 
 from email_assistant.src.memory.profile_store import load_profile
-from email_assistant.src.models.schemas import DraftResult, UserProfile
+from email_assistant.src.models.schemas import DraftResult
 
 
-def run(state: dict[str, Any]) -> dict[str, Any]:
-    """Personalize draft with user profile. Returns personalized_draft."""
-    draft = state.get("draft")
-    user_id = state.get("user_id", "default")
+class PersonalizationAgent:
+    """Applies user profile data (name, company, signature) to the draft."""
 
-    if not draft or not isinstance(draft, DraftResult):
-        return {"personalized_draft": draft}
+    def run(self, state: dict[str, Any]) -> dict[str, Any]:
+        draft = state.get("draft")
+        user_id = state.get("user_id", "default")
 
-    profile = load_profile(user_id)
-    if not profile or (not profile.name and not profile.company and not profile.style_preferences):
-        return {"personalized_draft": draft}
+        if not draft or not isinstance(draft, DraftResult):
+            return {"personalized_draft": draft}
 
-    body = draft.body
-    # Prefer explicit signature over just name if available
-    signature = profile.style_preferences.signature if profile.style_preferences and profile.style_preferences.signature else profile.name
+        profile = load_profile(user_id)
+        if not profile or (not profile.name and not profile.company and not profile.style_preferences):
+            return {"personalized_draft": draft}
 
-    if profile.company and "[Company]" in body:
-        body = body.replace("[Company]", profile.company)
+        body = draft.body
+        signature = (
+            profile.style_preferences.signature
+            if profile.style_preferences and profile.style_preferences.signature
+            else profile.name
+        )
 
-    # Always ensure a closing with signature/name when available
-    if signature:
-        stripped = body.rstrip()
-        # Avoid duplicating signature if already present at end
-        if not stripped.endswith(signature):
-            body = f"{stripped}\n\n{signature}"
-        else:
-            body = stripped
+        if profile.company and "[Company]" in body:
+            body = body.replace("[Company]", profile.company)
 
-    personalized = DraftResult(
-        subject=draft.subject,
-        body=body,
-        intent=draft.intent,
-        tone=draft.tone,
-    )
-    return {"personalized_draft": personalized}
+        if signature:
+            stripped = body.rstrip()
+            if not stripped.endswith(signature):
+                body = f"{stripped}\n\n{signature}"
+            else:
+                body = stripped
+
+        personalized = DraftResult(
+            subject=draft.subject,
+            body=body,
+            intent=draft.intent,
+            tone=draft.tone,
+        )
+        return {"personalized_draft": personalized}

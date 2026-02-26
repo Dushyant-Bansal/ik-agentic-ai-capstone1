@@ -5,17 +5,15 @@ from typing import Any, Literal, TypedDict
 from langgraph.graph import END, StateGraph
 from langgraph.checkpoint.memory import MemorySaver
 
-from email_assistant.src.agents import (
-    draft_writer_agent,
-    input_parser_agent,
-    intent_detection_agent,
-    personalization_agent,
-    review_agent,
-    router_agent,
-    tone_stylist_agent,
-)
+from email_assistant.src.agents.input_parser_agent import InputParserAgent
+from email_assistant.src.agents.intent_detection_agent import IntentDetectionAgent
+from email_assistant.src.agents.tone_stylist_agent import ToneStylistAgent
+from email_assistant.src.agents.draft_writer_agent import DraftWriterAgent
+from email_assistant.src.agents.personalization_agent import PersonalizationAgent
+from email_assistant.src.agents.review_agent import ReviewAgent
+from email_assistant.src.agents.router_agent import RouterAgent
 from email_assistant.src.integrations.config_loader import load_mcp_config
-from email_assistant.src.models.schemas import DraftResult, ReviewResult
+from email_assistant.src.models.schemas import ReviewResult
 
 
 class EmailAssistantState(TypedDict, total=False):
@@ -37,32 +35,42 @@ class EmailAssistantState(TypedDict, total=False):
     retry_reason: str
 
 
+# Instantiate agents once
+_input_parser = InputParserAgent()
+_intent_detection = IntentDetectionAgent()
+_tone_stylist = ToneStylistAgent()
+_draft_writer = DraftWriterAgent()
+_personalization = PersonalizationAgent()
+_review = ReviewAgent()
+_router = RouterAgent()
+
+
 def _input_parser_node(state: EmailAssistantState) -> dict[str, Any]:
-    return input_parser_agent.run(dict(state))
+    return _input_parser.run(dict(state))
 
 
 def _intent_detection_node(state: EmailAssistantState) -> dict[str, Any]:
-    return intent_detection_agent.run(dict(state))
+    return _intent_detection.run(dict(state))
 
 
 def _tone_stylist_node(state: EmailAssistantState) -> dict[str, Any]:
-    return tone_stylist_agent.run(dict(state))
+    return _tone_stylist.run(dict(state))
 
 
 def _draft_writer_node(state: EmailAssistantState) -> dict[str, Any]:
-    return draft_writer_agent.run(dict(state))
+    return _draft_writer.run(dict(state))
 
 
 def _personalization_node(state: EmailAssistantState) -> dict[str, Any]:
-    return personalization_agent.run(dict(state))
+    return _personalization.run(dict(state))
 
 
 def _review_node(state: EmailAssistantState) -> dict[str, Any]:
-    return review_agent.run(dict(state))
+    return _review.run(dict(state))
 
 
 def _router_node(state: EmailAssistantState) -> dict[str, Any]:
-    return router_agent.run(dict(state))
+    return _router.run(dict(state))
 
 
 def _route_after_review(state: EmailAssistantState) -> Literal["draft_writer", "__end__"]:
