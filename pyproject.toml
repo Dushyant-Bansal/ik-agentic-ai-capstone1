@@ -22,3 +22,8 @@ dependencies = [
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["email_assistant*"]
+
+[tool.pytest.ini_options]
+markers = [
+    "eval: LLM-as-a-judge evaluation tests (require OPENAI_API_KEY, cost real API calls)",
+]

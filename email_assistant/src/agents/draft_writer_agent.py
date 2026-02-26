@@ -59,13 +59,24 @@ class DraftWriterAgent:
 
         conversation_snippets = self._build_conversation_context(user_id)
 
+        profile = load_profile(user_id)
+        sender_info = ""
+        if profile:
+            name = profile.style_preferences.signature if profile.style_preferences and profile.style_preferences.signature else profile.name
+            if name:
+                sender_info = f"\nThe sender's name is: {name}. Use this name in the signoff -- do NOT use placeholders like [Your Name]."
+            if profile.company:
+                sender_info += f"\nThe sender's company is: {profile.company}. Use this instead of any [Company] placeholder."
+
         prompt = f"""Write a complete email based on this request.
 
 {parsed.prompt}{recipient}
 
 {tone_context}{length_hint}
+{sender_info}
 
-{conversation_snippets}Output a subject line and full body. Use proper email format (greeting, body, closing)."""
+{conversation_snippets}Output a subject line and full body. Use proper email format (greeting, body, closing).
+Do NOT include any placeholder text like [Your Name], [Name], [Sender Name], [Company], etc."""
 
         try:
             out = llm.invoke(prompt)

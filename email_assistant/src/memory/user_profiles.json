@@ -3,7 +3,7 @@
     {
       "id": "default",
       "name": "Dushyant",
-      "company": "Contoso",
+      "company": null,
       "style_preferences": {
         "preferred_tone": null,
         "signature": null,
@@ -50,30 +50,34 @@
           "subject": "Quick Question About Your Bug Spec",
           "intent": "info_request",
           "tone": "casual"
+        },
+        {
+          "subject": "Dinner Plans This Weekend?",
+          "intent": "outreach",
+          "tone": "friendly"
+        },
+        {
+          "subject": "Golf Plans This Weekend?",
+          "intent": "outreach",
+          "tone": "professional"
+        },
+        {
+          "subject": "Golf Plans This Weekend?",
+          "intent": "outreach",
+          "tone": "professional"
+        },
+        {
+          "subject": "Zoo Outing This Weekend?",
+          "intent": "outreach",
+          "tone": "professional"
+        },
+        {
+          "subject": "Zoo Outing This Weekend?",
+          "intent": "outreach",
+          "tone": "casual"
         }
       ],
       "conversation_history": [
-        {
-          "prompt": "Ask John about his bug",
-          "subject": "Inquiry Regarding Bug Report",
-          "body": "Hi John,\n\nI hope this message finds you well. I wanted to follow up on the bug report you submitted. I\u2019ve reviewed the details and have a few questions that I believe could help us resolve the issue more efficiently.\n\nCould we schedule a brief call this week to discuss it further? Please let me know your availability, and I will do my best to accommodate.\n\nThank you for your attention to this matter.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Contact Information]  \n[Your Company]\n\nDushyant",
-          "intent": "info_request",
-          "tone": "professional"
-        },
-        {
-          "prompt": "Tell him that we need it done by tomorrow",
-          "subject": "Urgent: Completion Required by Tomorrow",
-          "body": "Hi John,\n\nI hope this message finds you well. I wanted to touch base regarding the current tasks at hand. We need to ensure that everything is completed by tomorrow. \n\nPlease let me know if you foresee any challenges in meeting this deadline or if there\u2019s anything I can assist you with.\n\nThank you for your attention to this matter.\n\nBest regards,\n\n[Your Name]\n\nDushyant",
-          "intent": "internal_update",
-          "tone": "professional"
-        },
-        {
-          "prompt": "Follow up with John on the bug I assigned him last week.",
-          "subject": "Follow-Up on Bug Assignment",
-          "body": "Hi John,\n\nI hope this message finds you well. I wanted to follow up on the bug I assigned to you last week. Have you had a chance to make any progress or do you need any assistance?\n\nPlease let me know if you have any updates or if there's anything I can do to help.\n\nThank you for your attention to this matter.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Contact Information]  \n[Your Company]\n\nDushyant",
-          "intent": "follow_up",
-          "tone": "professional"
-        },
         {
           "prompt": "Ask him when can he get it done by?",
           "subject": "Timeline Inquiry for Task Completion",
@@ -107,6 +111,41 @@
           "subject": "Quick Question About Your Bug Spec",
           "body": "Hey John,\n\nHope you\u2019re doing well! I just wanted to check in and see if you have a spec for your bug yet. It would really help me get a better understanding of what needs to be fixed.\n\nThanks a bunch!\n\nCheers,\n[Your Name]\n\nDushyant",
           "intent": "info_request",
+          "tone": "casual"
+        },
+        {
+          "prompt": "Ask my friend Sumit if he is free to meet up for dinner this weekend",
+          "subject": "Dinner Plans This Weekend?",
+          "body": "Hi Sumit!\n\nHope you\u2019re doing well! I was thinking it would be great to catch up over dinner this weekend. Do you have some free time? \n\nLet me know what works for you, and we can pick a place to go!\n\nLooking forward to hearing from you!\n\nBest,\n[Your Name]\n\nDushyant",
+          "intent": "outreach",
+          "tone": "friendly"
+        },
+        {
+          "prompt": "Ask Sumit if he wants to play golf this weekend",
+          "subject": "Golf Plans This Weekend?",
+          "body": "Hi Sumit,\n\nI hope this message finds you well. I wanted to see if you would be interested in playing a round of golf this weekend. It would be great to catch up on the course and enjoy some time outdoors.\n\nLet me know if you\u2019re available, and we can set up a time that works for both of us.\n\nBest,\nDushyant\nContoso\n\nDushyant",
+          "intent": "outreach",
+          "tone": "professional"
+        },
+        {
+          "prompt": "Ask Sumit if he wants to play golf this weekend",
+          "subject": "Golf Plans This Weekend?",
+          "body": "Hi Sumit,\n\nI hope this message finds you well. I was wondering if you would be interested in playing golf this weekend. It would be a great opportunity to catch up and enjoy some time outdoors.\n\nPlease let me know if you're available, and we can arrange a time that works for both of us.\n\nBest,\nDushyant",
+          "intent": "outreach",
+          "tone": "professional"
+        },
+        {
+          "prompt": "Ask Sumit if he wants to take the families out to the zoo this weekend",
+          "subject": "Zoo Outing This Weekend?",
+          "body": "Hi Sumit,\n\nI hope this message finds you well. I was wondering if you would be interested in taking the families out to the zoo this weekend. It could be a great way for everyone to enjoy some time outdoors together.\n\nPlease let me know if you're available and if this sounds like a plan.\n\nBest,\nDushyant",
+          "intent": "outreach",
+          "tone": "professional"
+        },
+        {
+          "prompt": "Ask Sumit if he wants to take the families out to the zoo this weekend",
+          "subject": "Zoo Outing This Weekend?",
+          "body": "Hey Sumit!\n\nHope you\u2019re doing well! I was thinking it might be fun to take the families out to the zoo this weekend. The kids would love it, and it could be a nice way for us to hang out too.\n\nWhat do you think? Let me know if you\u2019re up for it!\n\nThanks!\n\nDushyant",
+          "intent": "outreach",
           "tone": "casual"
         }
       ]

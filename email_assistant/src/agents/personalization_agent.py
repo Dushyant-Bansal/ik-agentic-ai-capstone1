@@ -30,6 +30,15 @@ class PersonalizationAgent:
         if profile.company and "[Company]" in body:
             body = body.replace("[Company]", profile.company)
 
+        # Strip common LLM placeholder tokens
+        _PLACEHOLDERS = [
+            "[Your Name]", "[Name]", "[Sender Name]", "[Sender]",
+            "[Your Full Name]", "[Full Name]", "[Insert Name]",
+        ]
+        for ph in _PLACEHOLDERS:
+            if ph in body:
+                body = body.replace(ph, signature or "")
+
         if signature:
             stripped = body.rstrip()
             if not stripped.endswith(signature):
